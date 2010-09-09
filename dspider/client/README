@@ -1,0 +1,43 @@
+本程序是分布式抓站的客户端部分，它会负责向服务器请求url列表，在下载完成后再分批送回服务器。配置文件有两个：limits和crawclient.conf。配置文件的基本格式为
+配置项=值
+程序安装方法：放置到任意目录，如/file/to/path，在crontab中增加一行
+* * * * * cd /file/to/path && /usr/bin/perl ./schedule.pl &
+
+一、 limits说明
+这个文件在各客户机上根据情况会有不同，用于根据机器负载调整程序行为
+
+loadlimit
+	负载限制，格式为float,float,float，对应于系统命令uptime的load average输出(1分钟，5分钟，15分钟负载情况)，当负载中任何一项大于这个限制值，将不再向服务器请求新的数据
+timelimit
+	时段限制，格式为hour[-hour]:percent,...，例如0-8:1.5, 9-13:0.8, 14-22:0.5。表示在指定时段内只保持一定百分比的抓取力度。没有指定的时段默认维持10个抓取进程。
+spacelimit
+	硬盘空间限制，单位Kbyte，当程序当前目录的可用空间小于这个值时就停止请求新数据
+
+示例：
+loadlimit=5.5, 5.5, 5.5
+timelimit=0-8:1.5, 9-13:0.8, 14-22:0.5
+spacelimit=50000
+
+二、crawclient.conf说明
+
+该文件为crawclient.pl 和 upload.pl公用，在各客户机上应该保持统一。基本格式为
+
+get_host
+	提供数据的服务器ip列表，','分隔
+get_port
+	及端口
+put_host
+	接收数据的服务器ip列表，','分隔	
+put_port
+	及端口
+timeout
+	超时秒数，每隔这个时间发回一次数据给服务器(也可理解为发送延迟时间)
+updatemodule
+	自动更新所用的rsync模块，例如127.0.0.1::update。程序每隔一段时间会检查一次配置文件和程序自身，如果发现内容不同，就会进行更新，而只有crawclient.conf有变化后程序才会退出，由crontab负责将它再次启动。注意limits文件不会被更新。
+示例：
+get_host=127.0.0.1
+get_port=8082
+put_host=127.0.0.1
+put_port=8081
+updatemodule=127.0.0.1::client
+timeout=12

@@ -1,0 +1,26 @@
+1、需要安装如下perl模块：
+ Data::Dumper
+ Encode::CN
+ File::Path
+ HTML::Entities
+ IO::Handle
+ IO::Socket
+ Socket
+ List::Uti
+ Tie::RefHash
+
+2、解压程序
+   tar zxf dspider.tgz
+
+3、服务端：
+	a)添加模板
+	b)启动服务端程序
+	cd ./server
+	perl ./guard.sh
+	perl ./schedule.pl
+
+4、客户端
+	a)修改配置文件，添加服务端ip
+	b)启动客户端程序
+	cd ./client
+	perl ./schedule.pl

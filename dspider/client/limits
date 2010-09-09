@@ -1,0 +1,3 @@
+loadlimit=3.5,3.5,3.5
+timelimit=0-8:1.5, 9-13:0.8, 14-22:0.5
+spacelimit=500000
