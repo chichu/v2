@@ -1,0 +1,22 @@
+export LC_ALL=zh_CN.UTF-8
+export LANG=zh_CN.UTF-8
+export LANGUAGE=zh_CN:zh
+
+yum install gcc gcc-c++ libtool autoconf automake imake mysql-devel libxml2-devel expat-devel mysql-devel
+wget http://www.coreseek.cn/uploads/csft/3.2/coreseek-3.2.13.tar.gz
+tar xzf coreseek-3.2.13.tar.gz
+cd coreseek-3.2.13
+
+cd mmseg-3.2.13
+./bootstrap
+./configure --prefix=/usr/local/mmseg3
+make && make install
+
+cd 。。/csft-3.2.13
+./configure --prefix=/usr/local/coreseek --with-mmseg --with-mmseg-includes=/usr/local/mmseg3/include/mmseg/ --with-mmseg-libs=/usr/local/mmseg3/lib/
+make && make install
+
+
+
+
+
