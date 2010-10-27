@@ -9,11 +9,11 @@ DEFAULT_CONN_PARAMS = {
 
 DEFAULT_DB_ENGINE = "MySQLdb"
 
-def get_condition_sql(params):
+def join_dict(params,join_str=" and "):
     pairs = get_pairs(params)
     if len(pairs) == 1:
         return pairs[0]
-    return " and ".join(pairs)
+    return join_str.join(pairs)
  
 def get_pairs(values):
     pairs = []
@@ -24,12 +24,13 @@ def get_pairs(values):
             pairs.append("%s='%s'"%(key,value))
     return pairs
    
-class DBUtils():
-    def __init__(self,db_engine=DEFAULT_DB_ENGINE,conn_params=DEFAULT_CONN_PARAMS):
+class DBUtils:
+    def __init__(self,db_engine=DEFAULT_DB_ENGINE,conn_params=DEFAULT_CONN_PARAMS,charset='utf8'):
         try:
             module = __import__(db_engine)
-            self.conn = module.connect(conn_params)
-            self.cursor = module.conn.cursor()
+            self.conn = module.connect(**conn_params)
+            self.cursor = self.conn.cursor()
+            self.cursor.execute("set names '%s'"%charset)
         except Exception,e:
             print "Error in init DBUtils:%s" % e
         
@@ -47,17 +48,21 @@ class DBUtils():
         self.conn.close()
     
     def select(self,table,columns="*",condition={}):
-        sql = "select %s from %s where %s" % (",".join(columns),table,get_condition_sql(condition)
+        sql = "select %s from %s where %s" % (",".join(columns),table,join_dict(condition))
         return self.cursor.fetchall(sql)
         
     def insert(self,table,values={}):
-        sql = "insert into %s set %s" % (table,get_pairs(values))
+        if not bool(table) or not bool(values):return
+        sql = "insert into %s set %s" % (table,join_dict(values,","))
+        print sql
         return self.cursor.execute(sql)
         
     def update(self,table,values={},condition={}):
-        sql = "update %s set %s where %s"%(table,get_pairs(values),get_condition_sql(condition))
+        if not bool(table) or not bool(values):return
+        sql = "update %s set %s where %s"%(table,join_dict(values,","),join_dict(condition))
         return self.cursor.execute(sql)
         
     def delete(self,table,condition={}):
-        sql = "delete from %s where %s"%(table,get_condition_sql(condition))
+        if not bool(condition):return
+        sql = "delete from %s where %s"%(table,join_dict(condition))
         return self.cursor.execute(sql)
