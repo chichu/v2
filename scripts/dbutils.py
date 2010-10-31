@@ -30,7 +30,7 @@ class DBUtils:
             module = __import__(db_engine)
             self.conn = module.connect(**conn_params)
             self.cursor = self.conn.cursor()
-            self.cursor.execute("set names '%s'"%charset)
+            self.charset = charset 
         except Exception,e:
             print "Error in init DBUtils:%s" % e
         
@@ -53,16 +53,23 @@ class DBUtils:
         
     def insert(self,table,values={}):
         if not bool(table) or not bool(values):return
+        self.cursor.execute("set names '%s'"%self.charset)
         sql = "insert into %s set %s" % (table,join_dict(values,","))
-        print sql
-        return self.cursor.execute(sql)
+        return self.execute_sql(sql)
         
     def update(self,table,values={},condition={}):
         if not bool(table) or not bool(values):return
         sql = "update %s set %s where %s"%(table,join_dict(values,","),join_dict(condition))
-        return self.cursor.execute(sql)
+        return self.execute_sql(sql)
         
     def delete(self,table,condition={}):
         if not bool(condition):return
         sql = "delete from %s where %s"%(table,join_dict(condition))
-        return self.cursor.execute(sql)
+        return self.execute_sql(sql)
+   
+    def execute_sql(self,sql):
+        if not bool(sql):return 
+        try:
+            self.cursor.execute(sql)
+        except Exception,e:
+            print e 

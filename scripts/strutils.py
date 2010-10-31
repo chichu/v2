@@ -1,16 +1,22 @@
-#encoding:utf-8
+# -*- coding: utf-8-*-
+#from django.utils.encoding import smart_str,smart_unicode
+import re
+from datetime import datetime,timedelta
 
-from django.utils.encoding import smart_unicode
+def get_timestamp(days=1):
+    return (datetime.now()-timedelta(days=days)).strftime("%Y%m%d")
 
 def smart_utf8(content):
     try:
-        content = smart_unicode(content,"utf8").encode("utf8")
-    except:
-        content = smart_unicode(content,"gbk").encode("utf8")
+        content = content.decode('gbk')
+    except Exception,e:
+        try:
+            content = content.decode('latin1')
+        except:
+            pass
+    content = str(content.encode('utf8'))
     return content
     
-# -*- coding: utf-8-*-
-import re
 ##过滤HTML中的标签
 #将HTML中标签等信息去掉
 #@param htmlstr HTML字符串.
@@ -59,5 +65,5 @@ def replaceCharEntity(htmlstr):
             sz=re_charEntity.search(htmlstr)
     return htmlstr
 
-def repalce(s,re_exp,repl_string):
+def replace(s,re_exp,repl_string):
     return re_exp.sub(repl_string,s)

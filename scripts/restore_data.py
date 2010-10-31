@@ -1,15 +1,40 @@
+#!/usr/bin/python
 #encoding:utf-8
 
 import os,sys,re
-from datetime import datetime
 from dbutils import DBUtils
-from strutils import filter_tags,replace
-from django.utils.encoding import smart_str
+from strutils import filter_tags,replace,smart_utf8,get_timestamp
 
-DATA_ROOT = '/data1/dspider/data/src/'
+timestamp = get_timestamp(days=1) 
+table_name = "raw_data_%s" % timestamp
+
+CREATE_SQL = """
+create table %(table_name)s(      
+        id int(11) AUTO_INCREMENT PRIMARY KEY,
+        site varchar(255) NOT NULL,
+        uid  varchar(255) NULL,
+        author varchar(255) NULL,
+        channel varchar(255) NULL,
+        blogurl varchar(255) NULL,
+        blogt  varchar(255) NULL,
+        date DATE NULL,
+        time TIME NULL,      
+        url  varchar(255) NULL,
+        keyword varchar(255) NULL,
+        title  varchar(255) NULL,
+        article TEXT NULL
+);\n
+create index site_index_%(timestamp)s on %(table_name)s(site);\n
+create index date_index_%(timestamp)s on %(table_name)s(date);\n
+"""
+
+DATA_ROOT = '/data1/dspider/data/bak/%s/'%timestamp
 
 db = DBUtils()
+db.execute_sql(CREATE_SQL%{"table_name":table_name,"timestamp":timestamp})
+db.close()
 
+db = DBUtils()
 for pathname in os.listdir(DATA_ROOT):
     path = os.path.join(DATA_ROOT,pathname)
     for filename in os.listdir(path):
@@ -28,7 +53,10 @@ for pathname in os.listdir(DATA_ROOT):
                     date_dict = re.match(repx,filename).groupdict()
                     column['date'] = date_dict["date"] 
                     column['time'] = date_dict["time"]
-                    db.insert("raw_data",column)
+                    if column.has_key("udid"):
+                        column['uid'] = column['udid']
+                        del column['udid']
+                    db.insert(table_name,column)
                     column = {}
                     continue
                 repx = re.compile("^@(?P<name>\w+):(?P<value>.+)")
@@ -38,19 +66,13 @@ for pathname in os.listdir(DATA_ROOT):
                     name = tmp_dict['name'].lower()
                     value = tmp_dict['value'].strip()
                     try:
-                        value = filter_tags(smart_str(value,'utf-8'))
-                        value = repalce(value,re.compile("\'|\""),"")
+                        value = filter_tags(value).strip()
+                        value = replace(value,re.compile("\'|\""),"")
+                        value = smart_utf8(value)
                         column[name] = value
                     except Exception,e:
                         print e 
                         continue
         except Exception,e:
             print e
-db.commit()
 db.close()
-                
-
-
-
-
-
