@@ -1,0 +1,125 @@
+/*======================================
+      WELCOME TO THE STYLESHEET
+--------------------------------------      
+     Copyright Mike Crittenden
+      Author: Mike Crittenden
+======================================*/
+ 
+/**************************************\
+|------------COLOR SCHEME--------------|
+|--------------------------------------|
+- black		#000
+- white		#fff
+\**************************************/
+
+
+/**************************************/
+/*              GLOBALS               */
+/**************************************/
+body{margin:0;padding:0;background:#FFF url(/static/css/g/bg.jpg) repeat-x left 100px}
+.normal{}
+.darker{background:#777}
+.dark{background:#aaa}
+.lighter{background:#f6f6f6}
+.left{float:left}
+.right{float:right}
+
+/**************************************/
+/*              HEADER                */
+/**************************************/
+#header{background:#F9F9F7 url(/static/css/g/header.jpg) no-repeat;position:relative}
+#logo{width:120px;height:50px;background:url(/static/css/g/logo.png) no-repeat;position:absolute;left:20px;top:10px}
+#title{padding-top:25px;text-align:center}
+#title form input.txt{width:400px;height:16px}
+#loading{display:none;float:left;width:16px;height:16px;background:url(/static/css/g/loading.gif)}
+
+#info_bar{height:12px;color:#aaa;padding:4px 6px;background:#EEEDEA url(/static/css/g/header_bar.gif) repeat-x;overflow:hidden;clear:left}
+#info_bar span img{cursor:pointer}
+#info_bar .hint{display:none;padding-right:5px}
+#info_bar:hover .hint{display:inline}
+#expd{background:url(/static/css/g/expandAll.png);width:17px;height:16px;display:none}
+#clps{background:url(/static/css/g/collapseAll.png);width:17px;height:16px}
+
+
+/**************************************/
+/*             NAVIGATION             */
+/**************************************/
+/* JPolite Native Navigation Tab */
+#header_tabs{height:27px;list-style-type:none;margin:2em 0 0;display:block;position:relative;overflow:hidden}
+#header_tabs li{font-size:1.2em;font-weight:bold;line-height:25px;margin:0;padding:0 1em;background:#FFF;text-align:center;float:left;border-top:1px solid #DDDAC9;border-right:1px solid #DDDAC9;cursor:pointer;white-space:nowrap;position:relative;z-index:9}
+#header_tabs .hover{width:100%;height:100%;color:#C40000;margin:0;background:#EEEDEA;opacity:0;filter:alpha(opacity=0);text-align:center;display:block;position:absolute;left:0;top:0}
+#header_tabs li.on{background:#DDDAC9}
+#header_tabs li.on .hover{background:#DDDAC9}
+#header_tabs li.backLava{width:0;background:#F2A04E;border:0;position:absolute;z-index:1}
+a#add_module:link,a#add_module:visited{color:#000;height:16px;padding-left:20px;background:url(/static/css/g/add_module.gif) no-repeat;position:absolute;right:10px;top:76px;display:block;text-decoration:none}
+a#add_module:hover,a#add_module:active{text-decoration:none}
+/**************************************/
+/*            MAIN CONTENT            */
+/**************************************/
+#content{
+	padding-top:10px
+	/*
+	 * width:950px ==> this is the default value set by bluetrip .container class
+	 * You can adjust the width manually with a value = 950 +/- n*40
+	 */
+}
+.module_template{display:none}
+.cc{padding-bottom:1px}
+.dragging{padding-bottom:20px;margin-bottom:10px}
+.ui-sortable-placeholder{margin-bottom:10px;border:1px dotted #C68C15;background:url(/static/css/g/stripe0.png);visibility:visible!important;height:50px!important}
+
+/* Module Components */
+.module{background:#fff;margin-bottom:10px;display:none}
+.module:hover{border-color:#999}
+.moduleFrame{border:1px solid #DDDAC9;overflow:hidden}
+.moduleHeader{height:2em;color:#000;background:#DDDAC9;cursor:move;overflow:hidden}
+.moduleTitle{font-weight:bold;line-height:1.9em;padding-left:25px;background:url(/static/css/g/icon.png) no-repeat 5px center;float:left}
+.moduleActions{height:16px;padding:4px 2px 0;display:none;float:right}
+.moduleActions b{cursor:pointer;width:16px;height:16px;margin:0 3px;display:block;float:left}
+	.actionConfig{background:url(/static/css/g/actionConfig.png)}
+	.actionRefresh{background:url(/static/css/g/actionRefresh.png)}
+	.moduleActions .actionMax{display:none;background:url(/static/css/g/actionMax.png)}
+	.actionMin{background:url(/static/css/g/actionMin.png)}
+	.actionClose{background:url(/static/css/g/actionClose.png)}
+
+.moduleHeader:hover .moduleActions{display:block}
+.moduleContent{overflow:hidden;max-height:200px;padding:5px;background:#FFF;}
+.moduleSettings {border-top:1px solid #ddd; background:#fff;padding:5px; display:none;}
+
+/* Simple Theme for Modules */
+.red .moduleHeader{color:#FFF;background:#8E6363}
+.red .moduleFrame{border-color:#8E6363}
+.blue .moduleHeader{color:#FFF;background:#63798E}
+.blue .moduleFrame{border-color:#63798E}
+.green .moduleHeader{color:#FFF;background:#798E63}
+.green .moduleFrame{border-color:#798E63}
+
+
+/**************************************/
+/*               CONTROLS             */
+/**************************************/
+/* Tabs Control */
+.tabs{border:1px solid #ccc}
+.tabsul{overflow:hidden;padding-top:1px;background:#ccc;list-style-type:none;margin:0}
+.tabsul li{float:left;font-weight:bold;color:#777;background:#fff;border:1px solid #bbb;text-align:center;margin-left:2px;padding:4px 6px;cursor:pointer;white-space:nowrap}
+.tabsul li:hover{background:#f0f0f0;color:#333}
+.tabsul li.on{background:#fff url(/static/css/g/tabon.gif) repeat-x;border-bottom-color:#fff;color:#333;padding-bottom:6px}
+.tabsdiv{padding:4px;background:#fff}
+
+/* Accordion Control */
+.accordion{background:#ccc;padding:1px 3px 3px;margin:0}
+.accordion dt{background:#fff;font-weight:bold;color:#777;border:1px solid #bbb;padding:4px 6px;cursor:pointer;margin:2px 0 0}
+.accordion dt:hover{background:#f0f0f0;color:#333}
+.accordion dt.on{background:url(/static/css/g/tabon.gif) repeat-x;color:#333}
+.accordion dd{background:#fff;overflow-x:auto;padding:3px;border:1px solid #bbb;border-top:0;display:none}
+
+.menu li{cursor:pointer}
+.menu li:hover{background:#ddd}
+.menu li.on{background:#aaa}
+/**************************************/
+/*               FOOTER               */
+/**************************************/
+#footer{width:100%;height:120px;font-size:1.2em;color:#81754E;background:url(/static/css/g/footer.jpg) repeat-x;text-align:center}
+#footer_bar{height:1.2em;padding:10px 6px}
+#footer_bar a{color:#81754E;text-decoration:underline}
+#footer_bar a:hover{color:#C40000}

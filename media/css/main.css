@@ -1,0 +1,105 @@
+/* Reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dd,dl,dt,li,ol,ul,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;font-size:100%;font-weight:normal;font-style:normal;font-family:inherit;vertical-align:baseline}
+
+a,a:active,a:visited {text-decoration:none}
+a:hover {text-decoration:underline}
+ul,ol {list-style-type:none}
+.left  {float:left}
+.right {float:right}
+.center {text-align:center}
+p {margin: 5px 0}
+pre {border:1px dotted #777;background:#ffe;margin:1em;padding:5px}
+h1, h2, h3 {font-weight:normal;color:#111;}
+h1 {font-size:3em;line-height:1;margin-top:0.5em}
+h2 {font-size:2em;margin-top:0.75em}
+h3 {font-size:1.5em;line-height:1;margin-bottom:1em}
+ul.bullet {list-style-type:square; padding-left:20px; margin:5px 0}
+
+/* Header Portion */
+#header {background:#0e4cbc url(g/header.png) repeat-x}
+#logo {position:absolute; left:20px; top:10px; width:120px; height:50px; background-image:url(g/logo.png)}
+#loading {display:none}
+#title {color:#fff; font-size:1.2em; height:3em; line-height:3em; font-weight:bold; padding-left:160px}
+#header_tabs {font-size:1em; padding-left:160px}
+#header_tabs li {padding:0 1em; float:left; font-weight:bold; height:2em; line-height:2em; color:#eee;
+				background:#6ae url(g/header.png) 0 -8px; border-width:1px 1px 0 1px; border-style:solid; border-color:#acf #05b #000 #acf;
+				margin-right:5px;cursor:pointer; white-space:nowrap;}
+#header_tabs li:hover {color:#fff}				
+#header_tabs li.on {color:#07e; background:#f8f8f8 url(g/nav_bg.gif) repeat-x;}
+
+#info_bar {clear:left; color:#aaa; background-color:#fefefe; border-bottom:1px solid #ccc; padding:4px 6px; overflow:hidden; height:1.2em}
+#info_bar span img {cursor:pointer}
+#info_bar .hint {display:none;padding-right:5px}
+#info_bar:hover .hint {display:inline}
+#expd {background:url(g/module-expand.png);width:17px;height:16px;display:none}
+#clps {background:url(g/module-collapse.png);width:17px;height:16px}
+
+/* Main Content */
+#helper {background:#ffe; margin:12px; margin-bottom:0; padding:5px; border:1px solid #bbb; display:none}
+#main_table {width:100%}
+#content {padding:3px; position:relative}
+.container {float:left;min-height:5em}
+
+/* Footer Attached to Page Bottom */
+#footer {position:fixed; color:#eee; bottom:0; width:100%; height:5em; background:#757495 url(g/header.png) 0 16px; text-align:center}
+#footer_bar {color:#999; background-color:#fefefe; border-top:1px solid #ccc; border-bottom:1px solid #ccc; padding:4px 6px; height:1.2em; margin-bottom:10px}
+#footer_bar a {color:#999}
+#footer_bar a:hover {color:#333}
+
+/* Module Components */
+.module {background:#fff; border:3px solid #c0c0c0; margin:10px 6px; display:none}
+.moduleFrame {border:1px solid #4E8EE2; overflow:hidden;}
+.moduleHeader {height:1.6em; background:#4E8EE2 url(g/module-header.gif) repeat-x; border-left:1px solid #A7D0F6; border-top:1px solid #A7D0F6; color:#fff; cursor:move; overflow:hidden}
+.moduleIcon, .moduleTitle {line-height:1.4em; float:left; padding-left:2px; font-weight:bold}
+.moduleActions {display:none; float:right; height:16px; padding:0 2px}
+.moduleActions img {cursor:pointer;width:16px;height:16px}
+	.action_refresh {background:url('g/action-refresh.png')}
+	.action_max		{display:none;background:url('g/action-max.png')}
+	.action_min		{background:url('g/action-min.png')}
+	.action_close	{background:url('g/action-close.png')}
+.moduleHeader:hover .moduleActions {display:block}
+.moduleContent {border-top:1px solid #ddd; background:#fff url(g/nav_bg.gif) 0 -5px repeat-x; padding:5px}
+
+/* Drag-drop placeholder */
+.ui-sortable-placeholder {border: 1px dotted red; background:#faa; visibility: visible !important; height: 20px !important;}
+
+/* Light Theme Definitoin for Modules */
+.red .moduleHeader{background:#e24e61 url(g/module-orange.gif) repeat-x; border-color:#F6A7B8;}
+.red .moduleFrame{border-color:#E2584E;}
+.orange .moduleHeader{background:#E2584E url(g/module-red.gif) repeat-x; border-color:#F6A7A8}
+.orange .moduleFrame{border-color:#E2584E;}
+.yellow .moduleHeader{background:#E2904E url(g/module-yellow.gif) repeat-x; border-color:#F6C4A7;}
+.yellow .moduleFrame{border-color:#E2904E;}
+.green .moduleHeader{background:#66B161 url(g/module-green.gif) repeat-x; border-color:#ABCFA5}
+.green .moduleFrame{border-color:#66B161;}
+.white .moduleHeader{background:#9E9E9E url(g/module-white.gif) repeat-x; border-color:#D9D9D9}
+.white .moduleFrame{border-color:#9E9E9E;}
+
+/* For NavIcon */
+.navdiv {float:left; margin:2px; border:1px solid #ccc; text-align:center; width:70px; height:90px; overflow:hidden}
+.navdiv img {width:64px; height:64px}
+.navdiv a {display:block; padding:1px; height:88px}
+.navdiv a:hover {text-decoration:none; background:#14f; color:#eee}
+
+/* For NavLi */
+.navli {cursor:pointer; padding-left:28px; height:24px; line-height:24px; background:url(icon/link.gif) 0 0 no-repeat}
+.navli:hover {background-image:url(icon/link1.gif); font-weight:bold}
+
+/* For RSSLi */
+.rssli a {display:block; height:24px; line-height:24px; padding-left:28px; background:url(icon/rss.gif) 0 0 no-repeat}
+.rssli a:hover {background-image:url(icon/rss1.gif); font-weight:bold}
+
+/* Tabs Control */
+.tabs {border:1px solid #ccc}
+.tabsul {overflow:hidden;;padding-top:1px;background:#ccc}
+.tabsul li {float:left; font-weight:bold; color:#777; background:#fff; border:1px solid #bbb; text-align:center; margin-left:2px; padding:4px 6px; cursor:pointer; white-space:nowrap}
+.tabsul li:hover {background:#f0f0f0;color:#333}
+.tabsul li.on {background:#fff url(g/nav_bg.gif) repeat-x; border-bottom-color:#fff; color:#333; padding-bottom:6px}
+.tabsdiv {padding:4px}
+
+/* Accordion Control */
+.accordion {background:#fff}
+.accordion dt {font-weight:bold; color:#777; border:1px solid #bbb; padding:4px 6px; cursor:pointer; margin-top:2px}
+.accordion dt:hover {background:#f0f0f0;color:#333}
+.accordion dt.on {background:url(g/nav_bg.gif) repeat-x; color:#333}
+.accordion dd {overflow-x:auto; padding:3px; border-width:0px 1px 1px 1px; border-style:solid; border-color:#bbb; display:none}

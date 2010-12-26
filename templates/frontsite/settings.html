@@ -1,0 +1,10 @@
+{% if html %}
+<div id="widget_div_{{wid}}_setting">
+{{html|safe}}
+</div>
+<div><input type="button" value="Save" wid="{{wid}}" class="savebutton"/></div>
+<script language="javascript">
+	var params = "{{params|safe}}"; 
+    bindDefault("widget_div_{{wid}}_setting",params);
+</script>
+{% endif %}
