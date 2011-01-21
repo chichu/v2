@@ -18,7 +18,7 @@ class Brand(models.Model):
     class Meta:
         db_table = u'brand'
         verbose_name = 'Brands'
-
+'''
 class Keyword(models.Model):
     words = models.CharField(max_length=100)
     brand = models.ForeignKey(Brand)
@@ -26,6 +26,7 @@ class Keyword(models.Model):
         return self.words
     class Meta:
         db_table = u'keywords'
+'''
 
 SITE_CLASSIFICATION = (
     ('discuz','Discuz'),
