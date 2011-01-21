@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>V2</title>
-<link href="/media/css/default.css" rel="stylesheet" type="text/css" />
-<script src='/media/js/jquery.js' type='text/javascript'></script>
-<script src='/media/js/FusionCharts.js' type='text/javascript'></script>
+<link href="/static/js/main.css" rel="stylesheet" type="text/css" />
+<script src='/static/js/jquery.js' type='text/javascript'></script>
+<script src='/static/js/FusionCharts.js' type='text/javascript'></script>
 <meta http-equiv="refresh" content="300">
 </head>
 <body>
@@ -25,7 +25,7 @@
 			<select id="sv" name="sv">
                 <option value="*">所有行业</option>
                 {% for one_brand in brands %}
-			    <option value="{{one_brand.id}}" {%ifequal the_brand %}selected{%endifequal%}>{{one_brand.name}}</option>
+			    <option value="{{one_brand.id}}" {%ifequal the_brand one_brand.id%}selected{%endifequal%}>{{one_brand.name}}</option>
                 {% endfor %}
 			</select>
 			<script type="text/javascript">
