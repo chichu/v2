@@ -74,5 +74,5 @@ for pathname in os.listdir(DATA_ROOT):
                         print e 
                         continue
         except Exception,e:
-            print e
+            print "Error in restore date:",e
 db.close()
