@@ -47,15 +47,21 @@ class DBUtils:
         self.cursor.close()
         self.conn.close()
     
-    def select(self,table,columns="*",condition={}):
-        sql = "select %s from %s where %s" % (",".join(columns),table,join_dict(condition))
+    def select(self,table,columns="*",condition={},limit=0,from=0):
+        sql = "select %s from %s" % (",".join(columns),table)
+        if bool(condition):
+            sql += " where %s" % join_dict(condition)
+        if limit != 0:
+            sql += " limit %s,%s" %(from,limit)            
+        print sql
         c = self.cursor.execute(sql)
-        return c 
+        return self.cursor 
         
     def insert(self,table,values={}):
         if not bool(table) or not bool(values):return
         self.cursor.execute("set names '%s'"%self.charset)
         sql = "insert into %s set %s" % (table,join_dict(values,","))
+        print sql
         return self.execute_sql(sql)
         
     def update(self,table,values={},condition={}):
