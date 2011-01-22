@@ -31,26 +31,26 @@ cursor = db.select(table=table_name,columns=["count(*)"])
 (total,) = cursor.fetchone()
 limit = 100
 for i in range(0,total,limit):
-  cursor = db.select(table=table_name,columns=['id','site','title','article'],limit=limit,from=i)
-  while 1:
-    one = cursor.fetchone()
-    print one
-    if not bool(one):break
-    (data_id,site,title,article) = one
-    new_title = title
-    new_article = article
-    words = []
-    for word in keywords:
-        new_title = new_title.replace(word,"<font color=red>%s</font>"%word)
-        new_article = new_article.replace(word,"<font color=red>%s</font>"%word)
-        if (len(new_title) != len(title)) or (new_article != len(article)):
-            words.append(word)
-    if bool(words):
-        site_type = "Unknown"
-        if site_types.has_key(site):
-            site_type = site_types[site]
-        values = {'keywords':','.join(words),'site_type':site_type,'timestamp':timestamp,'index_table':table_name,'index_id':data_id}
-        db.insert(table='filtered_index_data',values=values)
+    cursor = db.select(table=table_name,columns=['id','site','title','article'],limit=limit,from=i)
+    while 1:
+        one = cursor.fetchone()
+        print one
+        if not bool(one):break
+        (data_id,site,title,article) = one
+        new_title = title
+        new_article = article
+        words = []
+        for word in keywords:
+            new_title = new_title.replace(word,"<font color=red>%s</font>"%word)
+            new_article = new_article.replace(word,"<font color=red>%s</font>"%word)
+            if (len(new_title) != len(title)) or (new_article != len(article)):
+                words.append(word)
+        if bool(words):
+            site_type = "Unknown"
+            if site_types.has_key(site):
+                site_type = site_types[site]
+            values = {'keywords':','.join(words),'site_type':site_type,'timestamp':timestamp,'index_table':table_name,'index_id':data_id}
+            db.insert(table='filtered_index_data',values=values)
 db.close()
 
 print datetime.now()
