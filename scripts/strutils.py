@@ -3,8 +3,8 @@
 import re
 from datetime import datetime,timedelta
 
-def get_timestamp(days=1):
-    return (datetime.now()-timedelta(days=days)).strftime("%Y%m%d")
+def get_timestamp(day_delta=1):
+    return (datetime.now()-timedelta(days=day_delta)).strftime("%Y%m%d")
 
 def smart_utf8(content):
     try:

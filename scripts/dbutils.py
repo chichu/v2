@@ -49,7 +49,8 @@ class DBUtils:
     
     def select(self,table,columns="*",condition={}):
         sql = "select %s from %s where %s" % (",".join(columns),table,join_dict(condition))
-        return self.cursor.fetchall(sql)
+        c = self.cursor.execute(sql)
+        return c 
         
     def insert(self,table,values={}):
         if not bool(table) or not bool(values):return
