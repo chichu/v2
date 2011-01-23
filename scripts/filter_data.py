@@ -7,8 +7,11 @@ from dbutils import DBUtils
 from strutils import get_timestamp
 
 print datetime.now()
- 
-timestamp = get_timestamp(day_delta=1) 
+
+if len(sys.argv) < 2: 
+    timestamp = get_timestamp(day_delta=1) 
+else:
+    timestamp = sys.argv[1] 
 table_name = "raw_data_%s" % timestamp
 
 db = DBUtils()
@@ -18,7 +21,6 @@ c = db.select(table='brand')
 for one in c.fetchall():
     id,name,buss = one
     keywords.append(name)
-print keywords
 
 site_types = {}
 c = db.select(table='sites')
@@ -31,26 +33,22 @@ cursor = db.select(table=table_name,columns=["count(*)"])
 (total,) = cursor.fetchone()
 limit = 100
 for i in range(0,total,limit):
-    cursor = db.select(table=table_name,columns=['id','site','title','article'],limit=limit,from=i)
-    while 1:
-        one = cursor.fetchone()
-        print one
+    cursor = db.select(table=table_name,columns=['id','site','title','article'],limit=limit,start=i)
+    for one in cursor.fetchall():
         if not bool(one):break
         (data_id,site,title,article) = one
-        new_title = title
-        new_article = article
+        if not bool(title) or not bool(article):continue
         words = []
         for word in keywords:
-            new_title = new_title.replace(word,"<font color=red>%s</font>"%word)
-            new_article = new_article.replace(word,"<font color=red>%s</font>"%word)
-            if (len(new_title) != len(title)) or (new_article != len(article)):
+            if title.find(word) != -1 or article.find(word) != -1:
                 words.append(word)
         if bool(words):
             site_type = "Unknown"
             if site_types.has_key(site):
                 site_type = site_types[site]
             values = {'keywords':','.join(words),'site_type':site_type,'timestamp':timestamp,'index_table':table_name,'index_id':data_id}
-            db.insert(table='filtered_index_data',values=values)
+            print values.items()
+            db.insert(table='filtered_data_index',values=values)
 db.close()
 
 print datetime.now()

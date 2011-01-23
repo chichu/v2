@@ -5,7 +5,10 @@ import os,sys,re
 from dbutils import DBUtils
 from strutils import filter_tags,replace,smart_utf8,get_timestamp
 
-timestamp = get_timestamp(days=1) 
+if len(sys.argv) < 2:
+    timestamp = get_timestamp(day_delta=1)
+else:
+    timestamp = sys.argv[1]
 table_name = "raw_data_%s" % timestamp
 
 CREATE_SQL = """
