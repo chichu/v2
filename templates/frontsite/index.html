@@ -8,14 +8,16 @@
 {% endblock %}
 
 {% block widgetcc %}
+<!--
     <script type="text/javascript">
 	function fetchbigpic(t){
-	    $.get("#",function(data){
+	    $.get("",function(data){
             $("#bigpic").html(data)
         })
         
     }
-    
+    fetchbigpic('h');
+-->    
     function goTab(num,tab_num,pre){
 	    //for(var i=0;i<tab_num;i++){document.getElementById(pre+"_info_"+i).style.display = "none";}
 	    //alert(pre);
@@ -24,7 +26,7 @@
 	    //document.getElementById(pre+"_info_"+num).style.display = "";
     }
     
-    fetchbigpic('h');
+   
 	</script>
     <div id="timeBar">
 		<div id="timeType">
@@ -76,11 +78,7 @@
         <div class="datagrid">
         <div id="chart1">
             <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
-             <script language='javascript'>
-                $.get("#", function(data){
-                        $("#chart1").html(data)
-                    })
-             </script>   
+             
         </div>
         </div>
 </div>
@@ -96,11 +94,7 @@
         <div class="datagrid">
         <div id="chart2">
             <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
-             <script language='javascript'>
-                $.get("#", function(data){
-                        $("#chart2").html(data)
-                    })
-             </script>   
+             
         </div>
         </div>
 </div>
@@ -117,11 +111,7 @@
 	    <table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
 			 <td id='service_chart'>
-			     <script type="text/javascript">
-             	   $.get("#",function(data){
-             	       $("#service_chart").html(data)
-             	   })
-             	</script>
+			     
 			 </td>
 			</tr>
 			<tr>
@@ -165,11 +155,8 @@
 	<span class="c_tr">&nbsp;</span>
 </h2>
 <div class="datagrid" id="table1">
-	<script type="text/javascript">
-	  $.get("#",function(data){
-	      $("#table1").html(data)
-	  })
-	</script>
+
+
 </div>
 
 <div class="clearit"></div><br/>
