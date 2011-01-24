@@ -15,23 +15,27 @@
 		<span id="user"><strong>{{uname}}</strong> | <a href="#">设置</a> | <a href="#">我的帐户</a> | <a href="#">帮助</a> | <a href="/logout/">退出</a></span>
 		<div class="clearit"></div>
 	</div>
-	<!--
+	
 	<div id="nav">
 		<div class="fl"></div>
 		{% block nav %}
 		<form action="" name="fm_view">
-			<a href="url">分析报告设置</a> |
-			查看报告:
-			<select id="sv" name="sv">
+			<select id="bussi" name="bussi">
                 <option value="*">所有行业</option>
+                {% for one_bussi in bussiness %}
+			    <option value="{{one_bussi.id}}" {%ifequal the_bussi one_bussi.id%}selected{%endifequal%}>{{one_bussi.name}}</option>
+                {% endfor %}
+			</select>
+			<select id="brand" name="brand">
+                <option value="*">所有品牌</option>
                 {% for one_brand in brands %}
 			    <option value="{{one_brand.id}}" {%ifequal the_brand one_brand.id%}selected{%endifequal%}>{{one_brand.name}}</option>
                 {% endfor %}
 			</select>
 			<script type="text/javascript">
-			 $("#sv").change(function(e){
-			     sv = encodeURIComponent($("#sv > option:selected").attr("value"))
-			     window.location = "/widget/?sv="+sv
+			 $("#brand").change(function(e){
+			     brand = encodeURIComponent($("#brand > option:selected").attr("value"))
+			     window.location = "/widget/?brand="+brand
 			 })
 			</script>
 			
@@ -40,7 +44,6 @@
 		<div class="fr"></div>
 		<div class="clearit"></div>
 	</div>
-	-->
 	<div id="sidebar">
 		<div class="box">
 			<div class="c_t">
@@ -49,8 +52,36 @@
 				<div class="clearit"></div>
 			</div>
          		<div class="info"> 
-        			{% block sidebar%}
-        			{% endblock %}
+        			<ul>
+    					<li class="ta">
+    						<a href="/" class="ico_1">首页</a>
+    						<div class="spacer"></div>
+    					</li>
+    					<li>
+    						<a href="#" class="ico_2">##菜单##</a>
+    						<div class="spacer"></div>
+    					</li>
+    					<li>
+    						<a href="#" class="ico_3">##菜单##</a>
+    						<div class="spacer"></div>
+    					</li>
+    					<li>
+    						<a href="#" class="ico_4">##菜单##</a>
+    						<div class="spacer"></div>
+    					</li>
+    					<li>
+    						<a href="#" class="ico_5">##菜单##</a>
+    						<div class="spacer"></div>
+    					</li>
+    					<li>
+    						<a href="#" class="ico_6">##菜单##</a>
+    						<div class="spacer"></div>
+    					</li>
+    					<li>
+    						<a href="#" class="ico_7">##菜单##</a>
+    						<div class="spacer"></div>
+    					</li>
+    				</ul>
 			</div>
 			<div class="c_b"> 
 				<div class="c_bl"></div> 

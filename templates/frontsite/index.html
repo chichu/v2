@@ -1,34 +1,8 @@
 {% extends "base.html" %}
-{% block sidebar%}
-				<ul>
-					<li class="ta">
-						<a href="/widget/?sv={{sv}}" class="ico_1">控制台</a>
-						<div class="spacer"></div>
-					</li>
-					<li>
-						<a href="http://logging.yunwei.intra.sina.com.cn/" class="ico_2">日志分析</a>
-						<div class="spacer"></div>
-					</li>
-					<li>
-						<a href="http://monitor.yunwei.intra.sina.com.cn/" class="ico_3">容量监控</a>
-						<div class="spacer"></div>
-					</li>
-					<li>
-						<a href="http://monitor.yunwei.intra.sina.com.cn/nagios/" class="ico_4">服务监控</a>
-						<div class="spacer"></div>
-					</li>
-					<!--
-					<li>
-						<a href="#" class="ico_5">CMDB</a>
-						<div class="spacer"></div>
-					</li>
-					-->
-				</ul>
-{% endblock %}
 
 {% block title%}
 <h1>
-	<span class="fl">控制台</span>
+	<span class="fl">首页</span>
     <span class="fr">{{start_time}} - {{end_time}}</span>
 </h1>
 {% endblock %}
@@ -36,7 +10,7 @@
 {% block widgetcc %}
     <script type="text/javascript">
 	function fetchbigpic(t){
-	    $.get("/widget/bigpic/?datatype="+t+"&date={{d}}&sv={{sv}}",function(data){
+	    $.get("#",function(data){
             $("#bigpic").html(data)
         })
         
@@ -54,15 +28,14 @@
 	</script>
     <div id="timeBar">
 		<div id="timeType">
-			日周月图切换：
-			
-			<a class="time time_1{% ifequal d 'day'%}_1{%endifequal%}" href="/widget/?date=day&sv={{sv}}"></a>
-		    <a class="time time_2{% ifequal d 'week'%}_1{%endifequal%}" href="/widget/?date=week&sv={{sv}}"></a>
-			<a class="time time_3{% ifequal d 'month'%}_1{%endifequal%}" href="/widget/?date=month&sv={{sv}}"></a>
+			日周月图切换：	
+			<a class="time time_1{% ifequal d 'day'%}_1{%endifequal%}" href="#"></a>
+		    <a class="time time_2{% ifequal d 'week'%}_1{%endifequal%}" href="#"></a>
+			<a class="time time_3{% ifequal d 'month'%}_1{%endifequal%}" href="#"></a>
 		</div>
 		<ul class="tab">
-			<li id="time_tab_0" class="ta" onclick="goTab(0,2,'time')"><a href="#" onclick="fetchbigpic('h')">Hits(万)</a></li>
-			<li id="time_tab_1" onclick="goTab(1,2,'time')"><a href="#" onclick="fetchbigpic('b')">带宽(GB)</a></li>
+			<li id="time_tab_0" class="ta" onclick="goTab(0,2,'time')"><a href="#" onclick="fetchbigpic('h')">###</a></li>
+			<li id="time_tab_1" onclick="goTab(1,2,'time')"><a href="#" onclick="fetchbigpic('b')">###</a></li>
 		</ul>
 		<div class="clearit"></div>
 		</div><br />
@@ -77,11 +50,11 @@
     <div class="rategrid">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td width="50%"><img src="/static/images/1.png" width="75" height="18" alt="" /><span class="num" id="num1"></span>当前5分钟总Hits(万)</td>
-                <td><img src="/static/images/2.png" width="75" height="18" alt="" /><span class="num" id="num2"></span>当前5分钟带宽(GB)</td>
+                <td width="50%"><img src="/static/images/1.png" width="75" height="18" alt="" /><span class="num" id="num1"></span>###</td>
+                <td><img src="/static/images/2.png" width="75" height="18" alt="" /><span class="num" id="num2"></span>###</td>
             </tr>
             <tr>
-                <td><img src="/static/images/3.png" width="75" height="18" alt="" /><span class="num" id="num3"></span>总Hits数(亿)</td>
+                <td><img src="/static/images/3.png" width="75" height="18" alt="" /><span class="num" id="num3"></span>###</td>
             </tr>
         </table>
     </div>
@@ -94,11 +67,50 @@
 	   })
 	</script>
 
+<div class="col fr">
+        <h2>
+            <span class="c_tl">&nbsp;</span>
+            <span class="fl">###</span>
+            <span class="c_tr">&nbsp;</span>
+        </h2>
+        <div class="datagrid">
+        <div id="chart1">
+            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+             <script language='javascript'>
+                $.get("#", function(data){
+                        $("#chart1").html(data)
+                    })
+             </script>   
+        </div>
+        </div>
+</div>
+<div class="clearit"></div>
+<br/>
+
+<div class="col fr">
+        <h2>
+            <span class="c_tl">&nbsp;</span>
+            <span class="fl">###</span>
+            <span class="c_tr">&nbsp;</span>
+        </h2>
+        <div class="datagrid">
+        <div id="chart2">
+            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+             <script language='javascript'>
+                $.get("#", function(data){
+                        $("#chart2").html(data)
+                    })
+             </script>   
+        </div>
+        </div>
+</div>
+<div class="clearit"></div>
+<br/>
 	
 <div class="col fl">
 	<h2>
 		<span class="c_tl">&nbsp;</span>
-		<span class="fl">服务可用性</span>
+		<span class="fl">评论数量</span>
 		<span class="c_tr">&nbsp;</span>
 	</h2>
 	<div class="datagrid">
@@ -106,14 +118,14 @@
 			<tr>
 			 <td id='service_chart'>
 			     <script type="text/javascript">
-             	   $.get("/widget/service_status_chart/?sts_cnts=serv&sv={{sv}}",function(data){
+             	   $.get("#",function(data){
              	       $("#service_chart").html(data)
              	   })
              	</script>
 			 </td>
 			</tr>
 			<tr>
-				<th colspan="3"><a href="{{nagios_url}}/chart_service/?sv={{sv}}&uname={{uname}}">查看报告</a></th>
+				<th colspan="3"><a href="#">查看报告</a></th>
 			</tr>
 		</table>
 	</div>
@@ -122,7 +134,7 @@
 <div class="col fr">
 	<h2>
 		<span class="c_tl">&nbsp;</span>
-		<span class="fl">主机可用性</span>
+		<span class="fl">来源分类</span>
 		<span class="c_tr">&nbsp;</span>
 	</h2>
 	<div class="datagrid">
@@ -130,14 +142,14 @@
 			<tr>
 			 <td id='host_chart'>
  			     <script type="text/javascript">
-              	   $.get("/widget/host_status_chart/?sts_cnts=serv&sv={{sv}}",function(data){
+              	   $.get("#",function(data){
               	       $("#host_chart").html(data)
               	   })
               	</script>
 			 </td>
 			</tr>
 			<tr>
-				<th colspan="3"><a href="{{nagios_url}}/chart_host/?sv={{sv}}&uname={{uname}}">查看报告</a></th>
+				<th colspan="3"><a href="#">查看报告</a></th>
 			</tr>
 		</table>
 	</div>
@@ -149,178 +161,19 @@
 
 <h2>
 	<span class="c_tl">&nbsp;</span>
-	<span class="fl">服务报警详细信息</span>
+	<span class="fl">评论详细信息</span>
 	<span class="c_tr">&nbsp;</span>
 </h2>
-<div class="datagrid" id="nagios_service_table">
+<div class="datagrid" id="table1">
 	<script type="text/javascript">
-	  $.get("/widget/nagios_table/service/?sv={{sv}}",function(data){
-	      $("#nagios_service_table").html(data)
+	  $.get("#",function(data){
+	      $("#table1").html(data)
 	  })
 	</script>
 </div>
 
 <div class="clearit"></div><br/>
 
-<h2>
-	<span class="c_tl">&nbsp;</span>
-	<span class="fl">主机报警详细信息</span>
-	<span class="c_tr">&nbsp;</span>
-</h2>
-<div class="datagrid" id="nagios_host_table">
-	<script type="text/javascript">
-	  $.get("/widget/nagios_table/host/?sv={{sv}}",function(data){
-	      $("#nagios_host_table").html(data)
-	  })
-	</script>
-</div>
 
-<div class="clearit"></div>
-<br/>
-
-
-<div class="col fl">
-	<h2>
-		<span class="c_tl">&nbsp;</span>
-		<span class="fl">带宽报警</span>
-		<span class="c_tr">&nbsp;</span>
-	</h2>
-	<div class="datagrid" id='mc_table'>
-		
-		<script type="text/javascript">
-		  $.get("/widget/mc_table/?sv={{sv}}",function(data){
-		      $("#mc_table").html(data)
-		  })
-		</script>
-	</div>
-</div>
-
-<div class="col fr">
-	<h2>
-		<span class="c_tl">&nbsp;</span>
-		<span class="fl">产品线带宽</span>
-		<span class="c_tr">&nbsp;</span>
-	</h2>
-	<div class="datagrid">
-	    <table width="100%" cellpadding="0" cellspacing="0">
-			<tr>
-			 <td id="mc">
-			 </td>
-			</tr>
-			<tr>
-				<th colspan="3"><a href="http://10.88.15.63:9200/report/realtime/sv/{{mc_sv}}/?sv={{sv}}&uname={{uname}}">查看报告</a></th>
-			</tr>
-		</table>
-	</div>
-	<script type="text/javascript">
-	   $.get("/widget/mc/?sv={{sv}}",function(data){
-	       $("#mc").html(data)
-	   })
-	</script>
-</div>
-
-<div class="clearit"></div>
-<br/>
-
-
-<div class="col fl">
-	<h2>
-		<span class="c_tl">&nbsp;</span>
-		<span class="fl">服务器使用率</span>
-		<span class="c_tr">&nbsp;</span>
-	</h2>
-	<div class="datagrid">
-	    <table width="100%" cellpadding="0" cellspacing="0">
-			<tr>
-                 <!-- http://mc.intra.sina.com.cn/sinard_test/data2/?token=CMDB&mc_w_sv=%E6%96%B0%E9%97%BB%E9%9D%99%E6%80%81%E6%B1%A0 -->
-			  <td id='datagrid3'>
-			     <script language='javascript'>
-			        $.get("/widget/mc_w_chart/?sv={{sv}}",function(data){
-                            $("#datagrid3").html(data)
-                        })
-                 </script>   
-			 </td>
-			</tr>
-			<tr>
-				<th colspan="3"><a href="http://10.88.15.63:9200/serverstatus/sv/{{mc_sv}}/?sv={{sv}}&uname={{uname}}">查看报告</a></th>
-			</tr>
-		</table>
-	</div>
-</div>
-
-
-<div class="col fr">
-	<h2>
-		<span class="c_tl">&nbsp;</span>
-		<span class="fl">产品线设备</span>
-		<span class="c_tr">&nbsp;</span>
-	</h2>
-	<div class="datagrid">
-	    <table width="100%" cellpadding="0" cellspacing="0">
-			<tr>
-			 <td id='datagrid1'>
-			     <script language='javascript'>
-			        $.get("/widget/cmdb_chart/?sv={{sv}}",function(data){
-                            $("#datagrid1").html(data)
-                        })
-                 </script>
-			 </td>
-			</tr>
-			<tr>
-				<th colspan="3"></th>
-			</tr>
-		</table>
-	</div>
-</div>
-
-<div class="clearit"></div>
-<br/>
-
-<div class="col fl">
-	<h2>
-		<span class="c_tl">&nbsp;</span>
-		<span class="fl">产品线iDSS指标</span>
-		<span class="c_tr">&nbsp;</span>
-	</h2>
-	<div class="datagrid">
-        <!-- http://idss.intra.sina.com.cn/score/interfaceScore.php/?pname=%D0%C2%CE%C5%BE%B2%CC%AC%B3%D8 -->
-	    <table width="100%" cellpadding="0" cellspacing="0">
-			<tr>
-			 <td id='datagrid2'>
-			     <script language='javascript'>
-			        $.get("/widget/idss_chart/?sv={{sv}}",function(data){
-                            $("#datagrid2").html(data)
-                        })
-                 </script>
-			 </td>
-			</tr>
-			<tr>
-				<th colspan="3"><a href="http://idss.intra.sina.com.cn">查看报告</a></th>
-			</tr>
-		</table>
-	</div>
-</div>
-<!--
-<div class="col fr">
-    <h2>
-        <span class="c_tl">&nbsp;</span>
-        <span class="fl"> 正在处理中的故障</span>
-        <span class="c_tr">&nbsp;</span>
-    </h2>
-    <div class="datagrid" id="om_list">
-    <div id="om_list_dat">
-        <div id="loading">Loading content, please wait..<img src="/static/img/loading.gif" alt="loading.." /></div>
-         <script language='javascript'>
-            $.get("/widget/nagios_process/?sv={{sv}}", function(data){
-                    $("#om_list_dat").html(data)
-                })
-         </script>   
-    </div>
-    </div>
-</div>
-
-<div class="clearit"></div>
-<br/>
--->
 
 {% endblock %}

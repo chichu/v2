@@ -6,7 +6,10 @@
 
 /* CSS Reset */
 *{margin:0;padding:0}
-body{font-size:12px;font-family:Arial,Tahoma,"宋体";color:#000;margin:10px 0;background:#EDF0F4 url(https://ssl.gstatic.com/analytics/20090929/images/header_background.png) repeat-x;text-align:center}
+body{
+    font-size:12px;font-family:Arial,Tahoma,"宋体";color:#000;margin:10px 0;
+    background:#EDF0F4 url(/static/images/back.jpeg);
+    repeat-x;text-align:center}
 br{line-height:10px}
 ul,li{list-style:none}
 ul,p,ol{line-height:20px}
@@ -28,7 +31,7 @@ a:hover,a:active{text-decoration:underline}
 #wrap{width:97.5%;min-width:960px;margin:0 auto;text-align:left}
 
 /* 头部 */
-#logo{width:278px;height:42px;background:url(/static/images/logo.gif) no-repeat;float:left;display:block}
+#logo{width:222px;height:166px;background:url(/static/images/logo.jpeg) no-repeat;float:left;display:block}
 #user{float:right}
 #user a{color:#005C9C}
 #nav{height:24px;font-weight:bold;color:#FFF;margin:2px 0 12px;background:#FF6D06}
