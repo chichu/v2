@@ -38,17 +38,14 @@ for i in range(0,total,limit):
         if not bool(one):break
         (data_id,site,title,article) = one
         if not bool(title) or not bool(article):continue
-        words = []
+        site_type = "Unknown"
+        if site_types.has_key(site):
+            site_type = site_types[site]
         for word in keywords:
             if title.find(word) != -1 or article.find(word) != -1:
-                words.append(word)
-        if bool(words):
-            site_type = "Unknown"
-            if site_types.has_key(site):
-                site_type = site_types[site]
-            values = {'keywords':','.join(words),'site_type':site_type,'timestamp':timestamp,'index_table':table_name,'index_id':data_id}
-            print values.items()
-            db.insert(table='filtered_data_index',values=values)
+                values = {'keywords':word,'site_type':site_type,'timestamp':timestamp,'index_table':table_name,'index_id':data_id}
+                print values.items()
+                db.insert(table='filtered_data_index',values=values)
 db.close()
 
 print datetime.now()
