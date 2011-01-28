@@ -8,26 +8,6 @@
 {% endblock %}
 
 {% block widgetcc %}
-<!--
-    <script type="text/javascript">
-	function fetchbigpic(t){
-	    $.get("/widget/",function(data){
-            $("#bigpic").html(data)
-        })
-        
-    }
-    fetchbigpic('h');
-    function goTab(num,tab_num,pre){
-	    //for(var i=0;i<tab_num;i++){document.getElementById(pre+"_info_"+i).style.display = "none";}
-	    //alert(pre);
-	    for(var i=0;i<tab_num;i++){document.getElementById(pre+"_tab_"+i).className = "";}
-	    document.getElementById(pre+"_tab_"+num).className = "ta";
-	    //document.getElementById(pre+"_info_"+num).style.display = "";
-    }
-    
-   
-	</script>
--->
     <div id="timeBar">
 		<div id="timeType">
 			日周月图切换：	
@@ -36,14 +16,35 @@
 			<a class="time time_3{% ifequal d 'month'%}_1{%endifequal%}" href="#"></a>
 		</div>
 		<ul class="tab">
-			<li id="time_tab_0" class="ta" onclick="goTab(0,2,'time')"><a href="#" onclick="fetchbigpic('h')">###</a></li>
-			<li id="time_tab_1" onclick="goTab(1,2,'time')"><a href="#" onclick="fetchbigpic('b')">###</a></li>
+			<li id="time_tab_0" class="ta" onclick="goTab(0,2,'time')"><a href="#" onclick="fetchbigchart('line')">总评论数曲线图</a></li>
+			<li id="time_tab_1" onclick="goTab(1,2,'time')"><a href="#" onclick="fetchbigchart('column')">总评论数柱图</a></li>
 		</ul>
 		<div class="clearit"></div>
 		</div><br />
     
-    <div id="bigpic"></div>
-    
+    <div id="bigchart">
+        <script type="text/javascript">
+    	function fetchbigchart(t){
+    	    if(t == "line ") swf = "Line.swf";
+    	    if(t == "column") swf = "Column3D.swf";
+    	    var chart = new FusionCharts("/static/swf/Column3D.swf", "bigchart",
+                     "735", "150", "0", "1");
+                   chart.setXMLUrl("/frontsite/total_xml/");
+                   chart.render("bigchart");
+
+        }
+        fetchbigpic('line');
+
+        function goTab(num,tab_num,pre){
+    	    //for(var i=0;i<tab_num;i++){document.getElementById(pre+"_info_"+i).style.display = "none";}
+    	    //alert(pre);
+    	    for(var i=0;i<tab_num;i++){document.getElementById(pre+"_tab_"+i).className = "";}
+    	    document.getElementById(pre+"_tab_"+num).className = "ta";
+    	    //document.getElementById(pre+"_info_"+num).style.display = "";
+        }
+    	</script>
+    </div>
+    <!--
     <h2>
         <span class="c_tl">&nbsp;</span>
         <span class="fl">详细信息</span>
@@ -73,27 +74,37 @@
 <div class="col fl">
         <h2>
             <span class="c_tl">&nbsp;</span>
-            <span class="fl">###</span>
+            <span class="fl">行业评论数TOP10</span>
             <span class="c_tr">&nbsp;</span>
         </h2>
         <div class="datagrid">
         <div id="chart1">
-            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
-             
+            <div class="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+             <script type='text/javascript'>
+             var chart = new FusionCharts("/static/swf/Pie3D.swf", "chart1",
+                     "340", "150", "0", "1");
+                   chart.setXMLUrl("/frontsite/bussi_xml/");
+                   chart.render("chart1");
+             </script>
         </div>
         </div>
 </div>
 
 <div class="col fr">
-        <h2>
+     <h2>
             <span class="c_tl">&nbsp;</span>
-            <span class="fl">###</span>
+            <span class="fl">品牌评论数TOP10</span>
             <span class="c_tr">&nbsp;</span>
         </h2>
         <div class="datagrid">
         <div id="chart2">
-            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
-             
+            <div class="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+             <script type='text/javascript'>
+             var chart = new FusionCharts("/static/swf/Pie3D.swf", "chart2",
+                     "340", "150", "0", "1");
+                   chart.setXMLUrl("/frontsite/brand_xml/");
+                   chart.render("chart2");
+             </script>
         </div>
         </div>
 </div>
@@ -103,14 +114,20 @@
 <div class="col fl">
 	<h2>
 		<span class="c_tl">&nbsp;</span>
-		<span class="fl">评论数量</span>
+		<span class="fl"></span>
 		<span class="c_tr">&nbsp;</span>
 	</h2>
 	<div class="datagrid">
 	    <table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
-			 <td id='service_chart'>
-            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+			 <td id='chart3'>
+			     <div class="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+                  <script type='text/javascript'>
+                  var chart = new FusionCharts("/static/swf/Line.swf", "chart3",
+                          "340", "150", "0", "1");
+                        chart.setXMLUrl("/frontsite/compare_xml/");
+                        chart.render("chart2");
+                  </script>
 			 </td>
 			</tr>
 			<tr>
@@ -123,14 +140,20 @@
 <div class="col fr">
 	<h2>
 		<span class="c_tl">&nbsp;</span>
-		<span class="fl">来源分类</span>
+		<span class="fl">评论来源网站类型</span>
 		<span class="c_tr">&nbsp;</span>
 	</h2>
 	<div class="datagrid">
 	    <table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
-			 <td id='host_chart'>
-            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+			 <td id='chart4'>
+			     <div class="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+ 			     <script type='text/javascript'>
+                   var chart = new FusionCharts("/static/swf/Line.swf", "chart4",
+                           "340", "150", "0", "1");
+                         chart.setXMLUrl("/frontsite/compare_xml/");
+                         chart.render("chart4");
+                   </script>
 			 </td>
 			</tr>
 			<tr>
@@ -150,10 +173,20 @@
 	<span class="c_tr">&nbsp;</span>
 </h2>
 <div class="datagrid" id="table1">
-
-
-            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
-
+    <table width="100%" cellpadding="0" cellspacing="0">
+		<tr>
+		 <td id='chart4'>
+		     <div class="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
+		     <script type='text/javascript'>
+               
+              </script>
+		 </td>
+		</tr>
+		<tr>
+			<th colspan="3"><a href="#">下一页</a></th>
+		</tr>
+	</table>
+>>>>>>> ca9c379b541420e5c23faea2827f7312b8b7de3d
 </div>
 
 <div class="clearit"></div><br/>

@@ -32,11 +32,19 @@ class FilteredDataIndex(models.Model):
     index_id = models.IntegerField()
     index_table = models.CharField(max_length=30)
     site_type = models.CharField(max_length=10)
-    timestamp = models.CharField(max_length=9)
+    timestamp = models.IntegerField()
     status = models.CharField(max_length=10,null=True,blank=True,default='00000')
-    keywords = models.CharField(max_length=100)
+    keyword = models.CharField(max_length=10)
     class Meta:
         db_table = u'filtered_data_index'
+
+class SumDataByDay(models.Model):
+    timestamp = models.IntegerField()
+    site_type = models.CharField(max_length=10)
+    keyword = models.CharField(max_length=10)
+    count = models.IntegerField()
+    class Meta:
+        db_table = u'sumdata_byday'
         
 SITE_CLASSIFICATION = (
     ('discuz','Discuz'),

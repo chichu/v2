@@ -19,22 +19,30 @@
 	<div id="nav">
 		<div class="fl"></div>
 		<form action="" name="fm_view">
-			<select id="bussi" name="bussi">
-                <option value="*">所有行业</option>
+			行业<select id="bussi" name="bussi">
+                <!--<option value="*">所有行业</option>-->
                 {% for one_bussi in bussiness %}
 			    <option value="{{one_bussi.id}}" {%ifequal the_bussi one_bussi.id%}selected{%endifequal%}>{{one_bussi.name}}</option>
                 {% endfor %}
 			</select>
-			<select id="brand" name="brand">
-                <option value="*">所有品牌</option>
+			品牌<select id="brand" name="brand">
+                <!--<option value="*">所有品牌</option>-->
                 {% for one_brand in brands %}
 			    <option value="{{one_brand.id}}" {%ifequal the_brand one_brand.id%}selected{%endifequal%}>{{one_brand.name}}</option>
                 {% endfor %}
 			</select>
 			<script type="text/javascript">
+			$("#bussi").change(function(e){
+			     bussi_id = encodeURIComponent($("#bussi > option:selected").attr("value"))
+			     $.get('/frontsite/get_brands/'+bussi_id+'/',function(data){
+			        $("#brand > option").remove()
+			        $("#brand > option").append(data)
+			     })
+			    
+			 })
 			 $("#brand").change(function(e){
 			     brand = encodeURIComponent($("#brand > option:selected").attr("value"))
-			     window.location = "/widget/?brand="+brand
+			     window.location = "?the_brand="+brand
 			 })
 			</script>
 			
@@ -88,30 +96,7 @@
 			</div> 
 		</div>
 		<br />
-		<!--
-        	<div class="box">
-    			<div class="c_t">
-    				<div class="c_tl"></div>
-    				<div class="c_tr"></div>
-    				<div class="clearit"></div>
-    			</div>
-             		<div class="info"> 
-             		<p>实验室</p>
-            		<ul>
-            			<li>
-            				<a href="/appmap/?sv={{sv}}" class="ico_5">服务连接关系图</a>
-            				<div class="spacer"></div>
-            			</li>
-    			    </ul>
-    			    </div>
-    			<div class="c_b"> 
-    				<div class="c_bl"></div> 
-    				<div class="c_br"></div> 
-    				<div class="clearit"></div> 
-    			</div> 
-    		</div>
-    		<br />
-    	-->
+		
 		<div class="box2">
 			<div class="c_t">
 				<div class="c_tl"></div>
