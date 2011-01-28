@@ -11,13 +11,12 @@
 <!--
     <script type="text/javascript">
 	function fetchbigpic(t){
-	    $.get("",function(data){
+	    $.get("/widget/",function(data){
             $("#bigpic").html(data)
         })
         
     }
     fetchbigpic('h');
--->    
     function goTab(num,tab_num,pre){
 	    //for(var i=0;i<tab_num;i++){document.getElementById(pre+"_info_"+i).style.display = "none";}
 	    //alert(pre);
@@ -28,6 +27,7 @@
     
    
 	</script>
+-->
     <div id="timeBar">
 		<div id="timeType">
 			日周月图切换：	
@@ -60,6 +60,7 @@
             </tr>
         </table>
     </div>
+<!--
     <script type="text/javascript">
 	   $.get("/widget/num3/?sv={{sv}}",function(data){
 	       nums = eval(data)
@@ -68,7 +69,7 @@
 	       $("#num3").html(nums[0])
 	   })
 	</script>
-
+-->
 <div class="col fl">
         <h2>
             <span class="c_tl">&nbsp;</span>
@@ -82,8 +83,6 @@
         </div>
         </div>
 </div>
-<div class="clearit"></div>
-<br/>
 
 <div class="col fr">
         <h2>
@@ -111,7 +110,7 @@
 	    <table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
 			 <td id='service_chart'>
-			     
+            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
 			 </td>
 			</tr>
 			<tr>
@@ -131,11 +130,7 @@
 	    <table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
 			 <td id='host_chart'>
- 			     <script type="text/javascript">
-              	   $.get("#",function(data){
-              	       $("#host_chart").html(data)
-              	   })
-              	</script>
+            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
 			 </td>
 			</tr>
 			<tr>
@@ -156,6 +151,8 @@
 </h2>
 <div class="datagrid" id="table1">
 
+
+            <div id="loading">Loading content, please wait..<img src="/static/images/loading.gif" alt="loading.." /></div>
 
 </div>
 

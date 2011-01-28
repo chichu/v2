@@ -8,8 +8,8 @@
 *{margin:0;padding:0}
 body{
     font-size:12px;font-family:Arial,Tahoma,"宋体";color:#000;margin:10px 0;
-    /*background:#EDF0F4 url(/static/images/logo.jpeg);*/
-    repeat-x;text-align:center}
+    /*background:#EDF0F4 url(/static/images/logo.jpeg);repeat-x;*/
+text-align:center}
 br{line-height:10px}
 ul,li{list-style:none}
 ul,p,ol{line-height:20px}
@@ -31,16 +31,17 @@ a:hover,a:active{text-decoration:underline}
 #wrap{width:97.5%;min-width:960px;margin:0 auto;text-align:left}
 
 /* 头部 */
-#logo{width:100px;height:40px;background:url(/static/images/logo.jpeg) no-repeat;
+#logo{width:140px;height:30px;
+/*background:url(/static/images/logo.jpeg) no-repeat;*/
 float:left;display:block}
 #user{float:right}
 #user a{color:#005C9C}
-#nav{height:24px;font-weight:bold;color:#FFF;margin:2px 0 12px;background:#FF6D06}
+#nav{height:24px;font-weight:bold;color:#FFF;margin:2px 0 12px;
+background:#FF6D06;}
 #nav a{color:#FFF}
 #nav form{margin:2px 5px 0;float:left}
 #nav .fl{width:2px;height:24px;background:url(/static/images/nav.gif) no-repeat}
 #nav .fr{width:2px;height:24px;background:url(/static/images/nav.gif) no-repeat right top}
-
 /* 边栏 */
 #sidebar{width:20%;float:left}
 #sidebar li{line-height:23px;margin:0 5px}
