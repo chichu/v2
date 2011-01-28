@@ -80,3 +80,4 @@ class DBUtils:
             self.cursor.execute(sql)
         except Exception,e:
             print e 
+        return self.cursor
