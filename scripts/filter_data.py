@@ -6,7 +6,7 @@ from datetime import datetime
 from dbutils import DBUtils
 from strutils import get_timestamp
 
-print datetime.now()
+start_time = datetime.now()
 
 if len(sys.argv) < 2: 
     timestamp = get_timestamp(day_delta=1) 
@@ -48,4 +48,4 @@ for i in range(0,total,limit):
                 db.insert(table='filtered_data_index',values=values)
 db.close()
 
-print datetime.now()
+print start_time,"   ",datetime.now()
