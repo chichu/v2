@@ -5,6 +5,10 @@
 create index site_index on filtered_data_index(site_type);
 create index keyword_index on filtered_data_index(keyword);
 create index timestamp_index on filtered_data_index(timestamp);
+
+create index site_sum_index on sumdata_byday(site_type);
+create index keyword_sum_index on sumdata_byday(keyword);
+create index timestamp_sum_index on sumdata_byday(timestamp);
 '''
 import os,sys
 from datetime import datetime
