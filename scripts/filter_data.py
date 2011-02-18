@@ -7,6 +7,22 @@ from dbutils import DBUtils
 from strutils import get_timestamp
 import thread
 
+def filter_data(db,table_name,start,delta,timestamp,keywords,site_types):
+    cursor = db.select(table=table_name,columns=['id','site','title','article'],limit=delta,start=start)
+    for one in cursor.fetchall():
+        if not bool(one):break
+        (data_id,site,title,article) = one
+        if not bool(title) or not bool(article):continue
+        site_type = "Unknown"
+        if site_types.has_key(site):
+            site_type = site_types[site]
+        for word in keywords:
+            if title.find(word) != -1 or article.find(word) != -1:
+                values = {'keywords':word,'site_type':site_type,'timestamp':timestamp,'index_table':table_name,'index_id':data_id}
+                print values.items()
+                db.insert(table='filtered_data_index',values=values)
+
+                
 start_time = datetime.now()
 
 if len(sys.argv) < 2: 
@@ -37,20 +53,6 @@ DELTA = 10000
 for start in range(0,total,DELTA):
     thread.start_new_thread(filter_data,(db,table_name,start,DELTA,timestamp,keywords,site_types))
 
-def filter_data(db,table_name,start,delta,timestamp,keywords,site_types):
-    cursor = db.select(table=table_name,columns=['id','site','title','article'],limit=delta,start=start)
-    for one in cursor.fetchall():
-        if not bool(one):break
-        (data_id,site,title,article) = one
-        if not bool(title) or not bool(article):continue
-        site_type = "Unknown"
-        if site_types.has_key(site):
-            site_type = site_types[site]
-        for word in keywords:
-            if title.find(word) != -1 or article.find(word) != -1:
-                values = {'keywords':word,'site_type':site_type,'timestamp':timestamp,'index_table':table_name,'index_id':data_id}
-                print values.items()
-                db.insert(table='filtered_data_index',values=values)
 db.close()
 
 print start_time,"   ",datetime.now()
