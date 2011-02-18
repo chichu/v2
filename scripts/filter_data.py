@@ -5,6 +5,7 @@ import os,sys
 from datetime import datetime
 from dbutils import DBUtils
 from strutils import get_timestamp
+import thread
 
 start_time = datetime.now()
 
@@ -31,9 +32,13 @@ print site_types.items()
 
 cursor = db.select(table=table_name,columns=["count(*)"])
 (total,) = cursor.fetchone()
-limit = 100
-for i in range(0,total,limit):
-    cursor = db.select(table=table_name,columns=['id','site','title','article'],limit=limit,start=i)
+
+DELTA = 10000
+for start in range(0,total,DELTA):
+    thread.start_new_thread(filter_data,(db,table_name,start,DELTA,timestamp,keywords,site_types))
+
+def filter_data(db,table_name,start,delta,timestamp,keywords,site_types):
+    cursor = db.select(table=table_name,columns=['id','site','title','article'],limit=delta,start=start)
     for one in cursor.fetchall():
         if not bool(one):break
         (data_id,site,title,article) = one
