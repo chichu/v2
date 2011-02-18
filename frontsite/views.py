@@ -11,7 +11,7 @@ def index(request):
     brands = Brand.objects.filter(buss=the_bussi)
     return render_to_response('frontsite/index.html',locals())
 
-def get_brands_bybuss(request,bussi_id):
+def get_brands_bybussi(request,bussi_id):
     bussi = Bussiness.object.get(id=bussi_id)
     brands = bussi.brand_set.all()
     html = ""
